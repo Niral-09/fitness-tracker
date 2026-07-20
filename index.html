@@ -1217,7 +1217,7 @@
         // ====================================================
         let S = {};
         try {
-            S = JSON.parse(localStorage.getItem('ironlog2') || '{}');
+            S = JSON.parse(localStorage.getItem('ironlog3') || '{}');
         } catch (e) {
             console.error('Storage parse error:', e);
             S = {};
@@ -1226,8 +1226,12 @@
         if (!S.done) S.done = {};
         if (!S.habs) S.habs = {};
         if (!S.tot) S.tot = 0;
-        if (!S.start) S.start = new Date().toISOString().slice(0, 10);
-        function save() { localStorage.setItem('ironlog2', JSON.stringify(S)); }
+        if (!S.start) {
+            const t = new Date();
+            t.setDate(t.getDate() + 1);
+            S.start = t.toISOString().slice(0, 10);
+        }
+        function save() { localStorage.setItem('ironlog3', JSON.stringify(S)); }
 
         // ====================================================
         // HELPERS
